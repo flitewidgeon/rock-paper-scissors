@@ -1,3 +1,7 @@
+// variables to track score for players
+let humanScore = 0;
+let computerScore = 0;
+
 // randomly return on of the following string values: 'rock', 'paper', 'scissors'
 function getComputerChoice(){
 	// generate a random number from following: 0, 1, 2
