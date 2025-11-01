@@ -17,3 +17,9 @@ function getComputerChoice(){
 	}
 	return choice;
 } 
+
+function getHumanChoice(){
+	const humanChoice = prompt('rock, paper, or scissors?');
+	return humanChoice;
+}
+
