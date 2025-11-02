@@ -27,3 +27,86 @@ function getHumanChoice(){
 	return humanChoice;
 }
 
+// given a human choice, decide a round result for the human based on the computer choice
+function decideRoundResult(computer, rockResult, paperResult, scissorsResult){
+	let result;
+	switch(computer){
+	case 'rock':
+		result = rockResult;
+		break;
+	case 'paper':
+		result = paperResult;
+		break;
+	case 'scissors':
+		result = scissorsResult;
+		break;
+	}
+	return result;
+}
+
+// create log message to show round result
+function createResultMessage(roundResult, humanSelection, computerSelection){
+	let message;
+	switch(roundResult){
+	case 'win':
+		message = `You win! ${humanSelection} beats ${computerSelection}`;
+		break;
+	case 'draw':
+		message = `It's a draw! You both chose ${humanSelection}`;
+		break;
+	case 'lose':
+		message = `You lose! ${computerSelection} beats ${humanSelection}`;
+		break;
+	}
+	return message;
+}
+
+// take the human and computer player choices as arguments, play a single round, 
+// increment the round winner's score and log a winner announcement
+function playRound(humanChoice, computerChoice){
+	const human = humanChoice.toLowerCase();
+	let roundResult;
+	if (human == 'rock'){
+	// human rock, computer rock -> draw
+	// human rock, computer paper -> lose
+	// human rock, computer scissors -> win
+		roundResult = decideRoundResult(computerChoice, 'draw', 'lose', 'win');
+	}
+	else if (human == 'paper'){
+	// human paper, computer rock -> win
+	// human paper, computer paper -> draw
+	// human paper, computer scissors -> lose
+		roundResult = decideRoundResult(computerChoice, 'win', 'draw', 'lose');
+	}
+	else if (human == 'scissors'){
+	// human scissors, computer rock -> lose
+	// human scissors, computer paper -> win
+	// human scissors, computer scissors -> draw
+		roundResult = decideRoundResult(computerChoice, 'lose', 'win', 'draw');
+	}
+
+	// display a string value to show the round winner
+	message = createResultMessage(roundResult, human, computerChoice);
+	console.log(message);
+
+	// increment the humanScore or computerScore variable based on round winner
+	if (roundResult == 'win'){
+		humanScore++;
+	}
+	else if (roundResult == 'lose'){
+		computerScore++;
+	}
+}
+
+const humanSelection = getHumanChoice();
+const computerSelection = getComputerChoice();
+
+playRound(humanSelection, computerSelection);
+
+
+
+
+
+
+
+
