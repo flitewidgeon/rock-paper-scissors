@@ -1,7 +1,3 @@
-// variables to track score for players
-let humanScore = 0;
-let computerScore = 0;
-
 // randomly return on of the following string values: 'rock', 'paper', 'scissors'
 function getComputerChoice(){
 	// generate a random number from following: 0, 1, 2
@@ -61,49 +57,78 @@ function createResultMessage(roundResult, humanSelection, computerSelection){
 	return message;
 }
 
-// take the human and computer player choices as arguments, play a single round, 
-// increment the round winner's score and log a winner announcement
-function playRound(humanChoice, computerChoice){
-	const human = humanChoice.toLowerCase();
-	let roundResult;
-	if (human == 'rock'){
-	// human rock, computer rock -> draw
-	// human rock, computer paper -> lose
-	// human rock, computer scissors -> win
-		roundResult = decideRoundResult(computerChoice, 'draw', 'lose', 'win');
-	}
-	else if (human == 'paper'){
-	// human paper, computer rock -> win
-	// human paper, computer paper -> draw
-	// human paper, computer scissors -> lose
-		roundResult = decideRoundResult(computerChoice, 'win', 'draw', 'lose');
-	}
-	else if (human == 'scissors'){
-	// human scissors, computer rock -> lose
-	// human scissors, computer paper -> win
-	// human scissors, computer scissors -> draw
-		roundResult = decideRoundResult(computerChoice, 'lose', 'win', 'draw');
+// play 5 rounds of the game, keep track of the scores, and
+// declare a winner at the end
+function playGame(){
+	// variables to track score for players
+	let humanScore = 0;
+	let computerScore = 0;
+
+	// take the human and computer player choices as arguments, play a single round, 
+	// increment the round winner's score and log a winner announcement
+	function playRound(humanChoice, computerChoice){
+		const human = humanChoice.toLowerCase();
+		let roundResult;
+		if (human == 'rock'){
+		// human rock, computer rock -> draw
+		// human rock, computer paper -> lose
+		// human rock, computer scissors -> win
+			roundResult = decideRoundResult(computerChoice, 'draw', 'lose', 'win');
+		}
+		else if (human == 'paper'){
+		// human paper, computer rock -> win
+		// human paper, computer paper -> draw
+		// human paper, computer scissors -> lose
+			roundResult = decideRoundResult(computerChoice, 'win', 'draw', 'lose');
+		}
+		else if (human == 'scissors'){
+		// human scissors, computer rock -> lose
+		// human scissors, computer paper -> win
+		// human scissors, computer scissors -> draw
+			roundResult = decideRoundResult(computerChoice, 'lose', 'win', 'draw');
+		}
+
+		// display a string value to show the round winner
+		message = createResultMessage(roundResult, human, computerChoice);
+		console.log(message);
+
+		// increment the humanScore or computerScore variable based on round winner
+		if (roundResult == 'win'){
+			humanScore++;
+		}
+		else if (roundResult == 'lose'){
+			computerScore++;
+		}
+
+
 	}
 
-	// display a string value to show the round winner
-	message = createResultMessage(roundResult, human, computerChoice);
-	console.log(message);
+	// play 5 rounds of the game
+	for (let i = 0; i < 5; i++){
+		const humanSelection = getHumanChoice();
+		const computerSelection = getComputerChoice();
+		playRound(humanSelection, computerSelection);
+	}
 
-	// increment the humanScore or computerScore variable based on round winner
-	if (roundResult == 'win'){
-		humanScore++;
+	// Declare the winner
+	let gameResult;
+	if (humanScore > computerScore){
+		gameResult = 'The winner is Player!';
 	}
-	else if (roundResult == 'lose'){
-		computerScore++;
+	else if (computerScore > humanScore){
+		gameResult = 'The winner is Computer!';
 	}
+	else{
+		gameResult = 'It\'s a draw!';
+	}
+	
+	console.log(`Game Over! ${gameResult}`); 
+	// display the score
+	console.log(`Player Score: ${humanScore} | Computer Score: ${computerScore}`);
 }
 
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
 
-playRound(humanSelection, computerSelection);
-
-
+playGame();
 
 
 
