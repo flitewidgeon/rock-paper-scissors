@@ -103,25 +103,43 @@ function playGame(){
 
 	}
 
-	const humanSelection = getHumanChoice();
-	const computerSelection = getComputerChoice();
-	playRound(humanSelection, computerSelection);
-		
+	const buttons = document.querySelectorAll("button");
+	buttons.forEach((button) => button.addEventListener('click', (event) => {
+		event.stopPropagation();
+		playRound(button.textContent, getComputerChoice())
+		// display the score
+		console.log(`Player Score: ${humanScore} | Computer Score: ${computerScore}`);
+
+		if (humanScore == 5 || computerScore == 5){
+			displayGameResult();
+		}
+
+	}));
+
+
+
+	//const humanSelection = getHumanChoice();
+	// const computerSelection = getComputerChoice();
+	// playRound(humanSelection, computerSelection);
+
 	// Declare the winner
-	let gameResult;
-	if (humanScore > computerScore){
-		gameResult = 'The winner is Player!';
+	function displayGameResult(){
+		let gameResult;
+		if (humanScore > computerScore){
+			gameResult = 'The winner is Player!';
+		}
+		else if (computerScore > humanScore){
+			gameResult = 'The winner is Computer!';
+		}
+		else{
+			gameResult = 'It\'s a draw!';
+		}
+		
+		console.log(`Game Over! ${gameResult}`); 
+
 	}
-	else if (computerScore > humanScore){
-		gameResult = 'The winner is Computer!';
-	}
-	else{
-		gameResult = 'It\'s a draw!';
-	}
-	
-	console.log(`Game Over! ${gameResult}`); 
-	// display the score
-	console.log(`Player Score: ${humanScore} | Computer Score: ${computerScore}`);
+
+
 }
 
 
