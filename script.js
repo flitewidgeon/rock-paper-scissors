@@ -18,10 +18,6 @@ function getComputerChoice(){
 	return choice;
 } 
 
-function getHumanChoice(){
-	const humanChoice = prompt('rock, paper, or scissors?');
-	return humanChoice;
-}
 
 // given a human choice, decide a round result for the human based on the computer choice
 function decideRoundResult(computer, rockResult, paperResult, scissorsResult){
@@ -104,6 +100,7 @@ function playGame(){
 	}
 
 	const buttons = document.querySelectorAll("button");
+
 	buttons.forEach((button) => button.addEventListener('click', (event) => {
 		event.stopPropagation();
 		playRound(button.textContent, getComputerChoice())
@@ -115,12 +112,6 @@ function playGame(){
 		}
 
 	}));
-
-
-
-	//const humanSelection = getHumanChoice();
-	// const computerSelection = getComputerChoice();
-	// playRound(humanSelection, computerSelection);
 
 	// Declare the winner
 	function displayGameResult(){
