@@ -103,13 +103,10 @@ function playGame(){
 
 	}
 
-	// play 5 rounds of the game
-	for (let i = 0; i < 5; i++){
-		const humanSelection = getHumanChoice();
-		const computerSelection = getComputerChoice();
-		playRound(humanSelection, computerSelection);
-	}
-
+	const humanSelection = getHumanChoice();
+	const computerSelection = getComputerChoice();
+	playRound(humanSelection, computerSelection);
+		
 	// Declare the winner
 	let gameResult;
 	if (humanScore > computerScore){
