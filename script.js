@@ -59,12 +59,15 @@ function playGame(){
 	// variables to track score for players
 	let humanScore = 0;
 	let computerScore = 0;
+	// Add div for displaying results
+	const div = document.querySelector("div");
 
 	// take the human and computer player choices as arguments, play a single round, 
 	// increment the round winner's score and log a winner announcement
 	function playRound(humanChoice, computerChoice){
 		const human = humanChoice.toLowerCase();
 		let roundResult;
+
 		if (human == 'rock'){
 		// human rock, computer rock -> draw
 		// human rock, computer paper -> lose
@@ -86,7 +89,9 @@ function playGame(){
 
 		// display a string value to show the round winner
 		message = createResultMessage(roundResult, human, computerChoice);
-		console.log(message);
+		const para = document.createElement("p");
+		para.textContent = message;
+		div.appendChild(para);
 
 		// increment the humanScore or computerScore variable based on round winner
 		if (roundResult == 'win'){
@@ -96,6 +101,10 @@ function playGame(){
 			computerScore++;
 		}
 
+		// display the running score
+		const scorePara = document.createElement("p");
+		scorePara.textContent = `Player Score: ${humanScore} | Computer Score: ${computerScore}`;
+		div.appendChild(scorePara); 
 
 	}
 
@@ -104,11 +113,12 @@ function playGame(){
 	buttons.forEach((button) => button.addEventListener('click', (event) => {
 		event.stopPropagation();
 		playRound(button.textContent, getComputerChoice())
-		// display the score
-		console.log(`Player Score: ${humanScore} | Computer Score: ${computerScore}`);
 
+		 // Announce a winner of the game once one player reaches 5 points
 		if (humanScore == 5 || computerScore == 5){
-			displayGameResult();
+			const resultPara = document.createElement('p');
+			resultPara.textContent = displayGameResult();
+			div.appendChild(resultPara);
 		}
 
 	}));
@@ -117,16 +127,16 @@ function playGame(){
 	function displayGameResult(){
 		let gameResult;
 		if (humanScore > computerScore){
-			gameResult = 'The winner is Player!';
+			gameResult = 'Game Over! The winner is Player!';
 		}
 		else if (computerScore > humanScore){
-			gameResult = 'The winner is Computer!';
+			gameResult = 'Game Over! The winner is Computer!';
 		}
 		else{
-			gameResult = 'It\'s a draw!';
+			gameResult = 'Game Over! It\'s a draw!';
 		}
 		
-		console.log(`Game Over! ${gameResult}`); 
+		return gameResult; 
 
 	}
 
