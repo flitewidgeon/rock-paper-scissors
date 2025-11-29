@@ -61,6 +61,11 @@ function playGame(){
 	let computerScore = 0;
 	// Add div for displaying results
 	const div = document.querySelector("div");
+	const para = document.createElement("p");
+	div.appendChild(para);
+	const scorePara = document.createElement("p");
+	div.appendChild(scorePara);
+
 
 	// take the human and computer player choices as arguments, play a single round, 
 	// increment the round winner's score and log a winner announcement
@@ -89,9 +94,8 @@ function playGame(){
 
 		// display a string value to show the round winner
 		message = createResultMessage(roundResult, human, computerChoice);
-		const para = document.createElement("p");
 		para.textContent = message;
-		div.appendChild(para);
+
 
 		// increment the humanScore or computerScore variable based on round winner
 		if (roundResult == 'win'){
@@ -102,9 +106,7 @@ function playGame(){
 		}
 
 		// display the running score
-		const scorePara = document.createElement("p");
 		scorePara.textContent = `Player Score: ${humanScore} | Computer Score: ${computerScore}`;
-		div.appendChild(scorePara); 
 
 	}
 
