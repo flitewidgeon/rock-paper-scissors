@@ -12,15 +12,13 @@ function getComputerChoice(){
 	return choice;
 }
 
-function getHumanChoice(){
-	return prompt('Rock, Paper, Scissors?');
-}
-
-
 function playGame() {
 
 	let humanScore = 0;
 	let computerScore = 0;
+	const buttonChoice = document.querySelector('.button-choice');
+	let humanSelection;
+
 
 	function playRound(humanChoice, computerChoice){
 		humanChoice = humanChoice.toLowerCase();
@@ -92,13 +90,11 @@ function playGame() {
 			computerScore++;
 		}
 	}
-
-
-	const humanSelection = getHumanChoice();
-	const computerSelection = getComputerChoice();
-
-	playRound(humanSelection, computerSelection);
-	console.log(`Player Score: ${humanScore} | Computer Score ${computerScore}`);
+	buttonChoice.addEventListener('click', (event) => {
+		humanSelection = event.target.textContent;
+		playRound(humanSelection, getComputerChoice());
+		console.log(`Player Score: ${humanScore} | Computer Score ${computerScore}`);
+		});
 }
 
 playGame();
