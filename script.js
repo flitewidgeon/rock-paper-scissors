@@ -87,7 +87,6 @@ function playGame() {
 			break;
 		}
 		resultPara.textContent = message;		
-		// console.log(message);
 
 		// Increment human score or computer score based on round winner
 		if (roundWinner == 'player'){
@@ -97,11 +96,19 @@ function playGame() {
 			computerScore++;
 		}
 	}
+
 	buttonChoice.addEventListener('click', (event) => {
 		humanSelection = event.target.textContent;
 		playRound(humanSelection, getComputerChoice());
-		scorePara.textContent = `Player Score: ${humanScore} | Computer Score ${computerScore}`;
-		});
+		if (humanScore == 5){
+			scorePara.textContent = 'Game Over! The winner is the player!';
+		} else if (computerScore == 5){
+			scorePara.textContent = 'Game Over! The winner is the computer!';
+		}
+		else{
+			scorePara.textContent = `Player Score: ${humanScore} | Computer Score ${computerScore}`;
+		}
+	});
 }
 
 playGame();
