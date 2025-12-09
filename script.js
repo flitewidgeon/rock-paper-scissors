@@ -93,13 +93,12 @@ function playGame() {
 		}
 	}
 
-	for (let i = 0; i < 5; i++){
-		const humanSelection = getHumanChoice();
-		const computerSelection = getComputerChoice();
 
-		playRound(humanSelection, computerSelection);
-		console.log(`Player Score: ${humanScore} | Computer Score ${computerScore}`);
-	}
+	const humanSelection = getHumanChoice();
+	const computerSelection = getComputerChoice();
+
+	playRound(humanSelection, computerSelection);
+	console.log(`Player Score: ${humanScore} | Computer Score ${computerScore}`);
 }
 
 playGame();
