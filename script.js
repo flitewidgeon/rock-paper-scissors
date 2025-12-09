@@ -19,11 +19,17 @@ function playGame() {
 	const buttonChoice = document.querySelector('.button-choice');
 	let humanSelection;
 
+	const results = document.querySelector('.results');
+	const announcementPara = document.createElement('p');
+	const resultPara = document.createElement('p');
+	const scorePara = document.createElement('p');
+	results.append(announcementPara, resultPara, scorePara);
+
 
 	function playRound(humanChoice, computerChoice){
 		humanChoice = humanChoice.toLowerCase();
 
-		console.log(`You chose ${humanChoice} and the Computer chose ${computerChoice}`);
+		announcementPara.textContent = `You chose ${humanChoice} and the Computer chose ${computerChoice}.`;
 
 		let roundWinner;
 
@@ -80,7 +86,8 @@ function playGame() {
 			message = `It's a draw!`;
 			break;
 		}
-		console.log(message);
+		resultPara.textContent = message;		
+		// console.log(message);
 
 		// Increment human score or computer score based on round winner
 		if (roundWinner == 'player'){
@@ -93,7 +100,7 @@ function playGame() {
 	buttonChoice.addEventListener('click', (event) => {
 		humanSelection = event.target.textContent;
 		playRound(humanSelection, getComputerChoice());
-		console.log(`Player Score: ${humanScore} | Computer Score ${computerScore}`);
+		scorePara.textContent = `Player Score: ${humanScore} | Computer Score ${computerScore}`;
 		});
 }
 
